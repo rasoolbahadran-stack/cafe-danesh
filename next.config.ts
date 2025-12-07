@@ -31,7 +31,7 @@ const nextConfig: NextConfig = {
   
   /* رفع مشکل مسیرها در Vercel */
   trailingSlash: false, // مسیرها بدون اسلش انتهایی
-  
+   
   /* برای سازگاری بهتر با Vercel */
   poweredByHeader: false,
   generateEtags: true,
