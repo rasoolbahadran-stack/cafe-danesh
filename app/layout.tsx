@@ -1,10 +1,44 @@
 import './globals.css'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 
+// ========== فقط این بخش رو آپدیت کن ==========
 export const metadata = {
-  title: 'کافه دانش - پلتفرم آموزشی تخصصی',
-  description: 'ارائه خدمات تخصصی دیجیتال از طراحی وب تا راه‌اندازی سیستم‌های پیشرفته',
+  title: 'کافه دانش - پلتفرم آموزشی تخصصی | CDanesh',
+  description: 'ارائه خدمات تخصصی دیجیتال از طراحی وب تا راه‌اندازی سیستم‌های پیشرفته. آموزش Next.js، React و سئو فنی',
+  keywords: 'آموزش برنامه‌نویسی, Next.js, React, سئو, آموزش سئو, توسعه وب, طراحی سایت, کافی‌نت آنلاین',
+  
+  openGraph: {
+    title: 'کافه دانش - پلتفرم آموزشی تخصصی | CDanesh',
+    description: 'ارائه خدمات تخصصی دیجیتال از طراحی وب تا راه‌اندازی سیستم‌های پیشرفته',
+    url: 'https://cdanesh.ir',
+    siteName: 'کافه دانش',
+    images: [
+      {
+        url: 'https://cdanesh.ir/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'کافه دانش - پلتفرم آموزشی',
+      },
+    ],
+    locale: 'fa_IR',
+    type: 'website',
+  },
+  
+  twitter: {
+    card: 'summary_large_image',
+    title: 'کافه دانش - پلتفرم آموزشی تخصصی | CDanesh',
+    description: 'ارائه خدمات تخصصی دیجیتال از طراحی وب تا راه‌اندازی سیستم‌های پیشرفته',
+    images: ['https://cdanesh.ir/og-image.png'],
+  },
+  
+  robots: {
+    index: true,
+    follow: true,
+  },
 }
+// ========== تا اینجا ==========
 
+// ========== بقیه کد تو دقیقاً همینه ==========
 export default function RootLayout({
   children,
 }: {
@@ -108,6 +142,7 @@ export default function RootLayout({
             </div>
           </div>
         </footer>
+        <SpeedInsights />
       </body>
     </html>
   )
