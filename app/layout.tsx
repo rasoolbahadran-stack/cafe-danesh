@@ -1,5 +1,15 @@
 import './globals.css'
 import { SpeedInsights } from '@vercel/speed-insights/next'
+// ========== اضافه کردن فونت Vazirmatn ==========
+import { Vazirmatn } from 'next/font/google'
+
+// پیکربندی فونت فارسی
+const vazir = Vazirmatn({
+  subsets: ['arabic', 'latin'],
+  variable: '--font-vazir',
+  display: 'swap',
+})
+// ========== پایان اضافه کردن فونت ==========
 
 // ========== فقط این بخش رو آپدیت کن ==========
 export const metadata = {
@@ -38,14 +48,15 @@ export const metadata = {
 }
 // ========== تا اینجا ==========
 
-// ========== بقیه کد تو دقیقاً همینه ==========
+// ========== بقیه کد تو دقیقاً همینه فقط کلاس فونت به تگ html اضافه شد ==========
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
   return (
-    <html lang="fa" dir="rtl">
+    // اضافه کردن کلاس فونت به تگ html
+    <html lang="fa" dir="rtl" className={vazir.variable}>
       <body>
         {/* هدر اصلی سایت با مگامنو */}
         <header className="header">
