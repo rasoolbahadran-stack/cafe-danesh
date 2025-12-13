@@ -18,7 +18,6 @@ const nextConfig: NextConfig = {
   /* رفع مشکل فونت‌ها و CSS */
   experimental: {
     optimizeCss: true, // بهینه‌سازی CSS
-    optimizeFonts: true, // بهینه‌سازی فونت‌ها - مهم!
   },
   
   /* رفع خطاهای رندر و هیدراسیون */
