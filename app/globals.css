@@ -1,1017 +1,177 @@
-/* ۱. اول @import فونت */
-@import url('https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css');
-
-/* ۲. سپس Tailwind */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-/* ... بقیه CSS شما */
 
-body {
-  font-family: Vazir, 'Segoe UI', Tahoma, Arial, sans-serif;
-  direction: rtl;
-  line-height: 1.6;
-  background: #ffffff;
-  overflow-x: hidden; /* جلوگیری از اسکرول افقی */
-}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body { font-family: var(--font-vazir); direction: rtl; line-height: 1.6; background: #ffffff; overflow-x: hidden; }
+
+.container { max-width: 1400px; margin: 0 auto; padding: 0 2rem; }
+
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.flex-wrap { flex-wrap: wrap; }
+.grid { display: grid; }
+.grid-cols-2 { grid-template-columns: 1fr 1fr; }
+.grid-cols-1 { grid-template-columns: 1fr; }
+.gap-4 { gap: 2rem; }
+.gap-2 { gap: 1rem; }
+.gap-1 { gap: 0.5rem; }
+.w-full { width: 100%; }
+
+.header { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0, 0, 0, 0.1); position: fixed; top: 0; width: 100%; z-index: 1000; padding: 1rem 0; }
+.header-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+.logo { display: flex; align-items: center; gap: 0.8rem; text-decoration: none; }
+.logo-icon { width: 40px; height: 40px; background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.2rem; }
+.logo-text { font-size: 1.5rem; font-weight: bold; background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+.desktop-menu { display: flex; gap: 0.5rem; align-items: center; }
+.menu-item { color: #4b5563; text-decoration: none; font-weight: 500; font-size: 1rem; padding: 0.75rem 1.5rem; border-radius: 8px; transition: all 0.3s ease; position: relative; white-space: nowrap; }
+.menu-item:hover { background: rgba(37, 99, 235, 0.1); color: #2563eb; }
+.menu-item.active { color: #2563eb; font-weight: 600; background: rgba(37, 99, 235, 0.1); }
+
+.mega-menu { position: relative; display: inline-block; }
+.mega-menu:hover .mega-submenu { opacity: 1; visibility: visible; transform: translateY(0); }
+.mega-submenu { position: absolute; top: 100%; right: 0; background: white; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.15); padding: 1rem; min-width: 220px; border: 1px solid #e5e7eb; opacity: 0; visibility: hidden; transform: translateY(-10px); transition: all 0.3s ease; z-index: 1000; }
+.submenu-item { display: block; padding: 0.75rem 1rem; color: #4b5563; text-decoration: none; border-radius: 6px; transition: all 0.2s ease; font-size: 0.9rem; }
+.submenu-item:hover { background: rgba(37, 99, 235, 0.1); color: #2563eb; }
+
+.mobile-menu-btn { background: transparent; border: none; font-size: 1.5rem; cursor: pointer; color: #2563eb; padding: 0.5rem; z-index: 1001; display: none; }
+.mobile-menu-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(20px); padding: 5rem 1rem 1rem; z-index: 1000; display: none; }
+.mobile-menu-close { position: absolute; top: 1rem; left: 1rem; background: transparent; border: none; font-size: 1.5rem; cursor: pointer; color: #2563eb; }
+.mobile-nav { display: flex; flex-direction: column; gap: 1rem; align-items: center; margin-top: 2rem; }
+.mobile-nav-item { color: #4b5563; text-decoration: none; font-weight: 500; padding: 1rem 2rem; border-radius: 12px; display: block; font-size: 1.2rem; width: 100%; text-align: center; border: 2px solid #e5e7eb; transition: all 0.3s ease; max-width: 300px; }
+.mobile-nav-item.active { color: #2563eb; font-weight: 600; background: rgba(37, 99, 235, 0.1); border-color: #2563eb; }
+.mobile-nav-item:hover { background: rgba(37, 99, 235, 0.1); color: #2563eb; }
+
+.cta-button { background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%); color: white; border: none; padding: 1rem 2.5rem; border-radius: 8px; font-weight: 600; font-size: 1.1rem; cursor: pointer; transition: all 0.3s ease; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3); font-family: var(--font-vazir); }
+.cta-button:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4); }
+.cta-button-outline { background: transparent; color: #2563eb; border: 2px solid #2563eb; padding: 1rem 2.5rem; border-radius: 8px; font-weight: 600; font-size: 1.1rem; cursor: pointer; transition: all 0.3s ease; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--font-vazir); }
+.cta-button-outline:hover { background: #2563eb; color: white; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3); }
+.cta-button-white { background: white; color: #2563eb; border: none; padding: 1rem 2.5rem; border-radius: 8px; font-weight: 600; font-size: 1.1rem; cursor: pointer; transition: all 0.3s ease; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3); }
+.cta-button-white:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255, 255, 255, 0.4); }
+.cta-button-outline-white { background: transparent; color: white; border: 2px solid white; padding: 1rem 2.5rem; border-radius: 8px; font-weight: 600; font-size: 1.1rem; cursor: pointer; transition: all 0.3s ease; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; }
+.cta-button-outline-white:hover { background: white; color: #2563eb; transform: translateY(-2px); }
+.cta-button-small { background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%); color: white; border: none; padding: 0.6rem 1.5rem; border-radius: 6px; font-weight: 600; font-size: 0.9rem; cursor: pointer; transition: all 0.3s ease; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; }
+.cta-button-small:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3); }
+
+/* بخش هیرو - ارتفاع اتوماتیک */
+.hero-section { background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); padding: 5rem 2rem 3rem; display: block; position: relative; }
+.hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+.hero-badge { font-size: 0.8rem; margin: 0 auto 1rem; text-align: center; display: block; width: fit-content; }
+.hero-title { font-size: 2.8rem; font-weight: bold; line-height: 1.2; margin-bottom: 1rem; color: #1e293b; }
+.hero-subtitle { font-size: 1.1rem; color: #64748b; line-height: 1.6; margin-bottom: 2rem; max-width: 100%; }
+.hero-card { background: white; border-radius: 20px; padding: 1.5rem; box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1); border: 1px solid rgba(0, 0, 0, 0.05); margin-top: 2rem; }
+.hero-card-image { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); height: 200px; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem; font-weight: bold; margin-bottom: 1.5rem; }
+.hero-buttons { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; margin-bottom: 2rem; }
+
+.stats-container { display: flex; gap: 3rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e2e8f0; justify-content: flex-start; flex-wrap: wrap; }
+.stat-item { text-align: center; min-width: 120px; }
+.stat-number { font-size: 2rem; font-weight: bold; color: #2563eb; }
+.stat-label { color: #64748b; font-size: 0.9rem; }
+
+.services-section { padding: 6rem 2rem; background: white; }
+.section-header { text-align: center; margin-bottom: 5rem; }
+.section-title { font-size: 2.8rem; font-weight: bold; margin-bottom: 1.5rem; color: #1e293b; }
+.section-description { font-size: 1.2rem; color: #64748b; max-width: 600px; margin: 0 auto; line-height: 1.7; }
+.service-tabs { display: flex; gap: 1rem; justify-content: center; margin-bottom: 3rem; flex-wrap: wrap; }
+.service-tab { background: white; color: #4b5563; border: 2px solid #e5e7eb; padding: 1rem 2rem; border-radius: 12px; font-weight: 600; font-size: 1rem; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 0.5rem; }
+.service-tab.active { background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%); color: white; border: none; }
+.service-content { background: #f8fafc; border-radius: 20px; padding: 3rem; border: 1px solid #e2e8f0; }
+.service-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+.service-info { text-align: right; }
+.service-title { font-size: 2rem; font-weight: bold; margin-bottom: 1rem; color: #1e293b; }
+.service-description { font-size: 1.1rem; color: #64748b; line-height: 1.8; margin-bottom: 2rem; }
+.feature-list { list-style: none; padding: 0; text-align: right; }
+.feature-item { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem; color: #374151; font-size: 1rem; }
+.feature-icon { color: #10b981; font-size: 1.2rem; flex-shrink: 0; }
+.service-display { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); height: 300px; border-radius: 15px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; font-weight: bold; }
+
+.cta-section { background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%); padding: 6rem 2rem; text-align: center; color: white; }
+.cta-title { font-size: 2.8rem; font-weight: bold; margin-bottom: 1.5rem; }
+.cta-description { font-size: 1.2rem; margin-bottom: 3rem; opacity: 0.9; line-height: 1.7; }
+.cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+.footer { background: #0f172a; color: white; padding: 4rem 2rem 2rem; }
+.footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 3rem; }
+.footer-section { text-align: right; }
+.footer-logo { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; text-decoration: none; }
+.footer-logo-text { font-size: 1.5rem; font-weight: bold; color: white; }
+.footer-about { color: #cbd5e1; line-height: 1.7; margin-top: 1rem; }
+.footer-heading { font-size: 1.2rem; font-weight: bold; margin-bottom: 1.5rem; }
+.footer-links { display: flex; flex-direction: column; gap: 0.75rem; }
+.footer-link { color: #cbd5e1; text-decoration: none; transition: color 0.3s ease; }
+.footer-link:hover { color: white; }
+.footer-contact { display: flex; flex-direction: column; gap: 0.75rem; color: #cbd5e1; }
+.footer-bottom { border-top: 1px solid #334155; padding-top: 2rem; text-align: center; color: #94a3b8; font-size: 0.9rem; }
 
-/* استایل‌های پایه */
-.container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 2rem;
-}
-
-.text-center {
-  text-align: center;
-}
-
-.text-right {
-  text-align: right;
-}
-
-.flex {
-  display: flex;
-}
-
-.flex-col {
-  flex-direction: column;
-}
-
-.items-center {
-  align-items: center;
-}
-
-.justify-center {
-  justify-content: center;
-}
-
-.justify-between {
-  justify-content: space-between;
-}
-
-.flex-wrap {
-  flex-wrap: wrap;
-}
-
-.grid {
-  display: grid;
-}
-
-.grid-cols-2 {
-  grid-template-columns: 1fr 1fr;
-}
-
-.grid-cols-1 {
-  grid-template-columns: 1fr;
-}
-
-.gap-4 {
-  gap: 2rem;
-}
-
-.gap-2 {
-  gap: 1rem;
-}
-
-.gap-1 {
-  gap: 0.5rem;
-}
-
-.w-full {
-  width: 100%;
-}
-
-/* هدر و ناوبری */
-.header {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 1000;
-  padding: 1rem 0;
-}
-
-.header-inner {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap; /* برای موبایل */
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  text-decoration: none;
-}
-
-.logo-icon {
-  width: 40px;
-  height: 40px;
-  background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-weight: bold;
-  font-size: 1.2rem;
-}
-
-.logo-text {
-  font-size: 1.5rem;
-  font-weight: bold;
-  background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* منوی دسکتاپ */
-.desktop-menu {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-}
-
-.menu-item {
-  color: #4b5563;
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 1rem;
-  padding: 0.75rem 1.5rem;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-  position: relative;
-  white-space: nowrap; /* جلوگیری از شکستن متن */
-}
-
-.menu-item:hover {
-  background: rgba(37, 99, 235, 0.1);
-  color: #2563eb;
-}
-
-.menu-item.active {
-  color: #2563eb;
-  font-weight: 600;
-  background: rgba(37, 99, 235, 0.1);
-}
-
-/* مگامنو */
-.mega-menu {
-  position: relative;
-  display: inline-block;
-}
-
-.mega-menu:hover .mega-submenu {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-
-.mega-submenu {
-  position: absolute;
-  top: 100%;
-  right: 0;
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-  padding: 1rem;
-  min-width: 220px;
-  border: 1px solid #e5e7eb;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-10px);
-  transition: all 0.3s ease;
-  z-index: 1000;
-}
-
-.submenu-item {
-  display: block;
-  padding: 0.75rem 1rem;
-  color: #4b5563;
-  text-decoration: none;
-  border-radius: 6px;
-  transition: all 0.2s ease;
-  font-size: 0.9rem;
-}
-
-.submenu-item:hover {
-  background: rgba(37, 99, 235, 0.1);
-  color: #2563eb;
-}
-
-/* منوی موبایل */
-.mobile-menu-btn {
-  background: transparent;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: #2563eb;
-  padding: 0.5rem;
-  z-index: 1001;
-  display: none; /* مخفی در دسکتاپ */
-}
-
-.mobile-menu-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(255, 255, 255, 0.98);
-  backdrop-filter: blur(20px);
-  padding: 5rem 1rem 1rem;
-  z-index: 1000;
-  display: none; /* مخفی به صورت پیش‌فرض */
-}
-
-.mobile-menu-close {
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
-  background: transparent;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: #2563eb;
-}
-
-.mobile-nav {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  align-items: center;
-  margin-top: 2rem;
-}
-
-.mobile-nav-item {
-  color: #4b5563;
-  text-decoration: none;
-  font-weight: 500;
-  padding: 1rem 2rem;
-  border-radius: 12px;
-  display: block;
-  font-size: 1.2rem;
-  width: 100%;
-  text-align: center;
-  border: 2px solid #e5e7eb;
-  transition: all 0.3s ease;
-  max-width: 300px; /* محدودیت عرض */
-}
-
-.mobile-nav-item.active {
-  color: #2563eb;
-  font-weight: 600;
-  background: rgba(37, 99, 235, 0.1);
-  border-color: #2563eb;
-}
-
-.mobile-nav-item:hover {
-  background: rgba(37, 99, 235, 0.1);
-  color: #2563eb;
-}
-
-/* دکمه CTA */
-.cta-button {
-  background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
-  color: white;
-  border: none;
-  padding: 1rem 2.5rem;
-  border-radius: 8px;
-  font-weight: 600;
-  font-size: 1.1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
-  font-family: 'Vazir', 'Segoe UI', Tahoma, sans-serif;
-}
-
-.cta-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
-}
-
-.cta-button-outline {
-  background: transparent;
-  color: #2563eb;
-  border: 2px solid #2563eb;
-  padding: 1rem 2.5rem;
-  border-radius: 8px;
-  font-weight: 600;
-  font-size: 1.1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-family: 'Vazir', 'Segoe UI', Tahoma, sans-serif;
-}
-
-.cta-button-outline:hover {
-  background: #2563eb;
-  color: white;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3);
-}
-
-.cta-button-white {
-  background: white;
-  color: #2563eb;
-  border: none;
-  padding: 1rem 2.5rem;
-  border-radius: 8px;
-  font-weight: 600;
-  font-size: 1.1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
-}
-
-.cta-button-white:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.4);
-}
-
-.cta-button-outline-white {
-  background: transparent;
-  color: white;
-  border: 2px solid white;
-  padding: 1rem 2.5rem;
-  border-radius: 8px;
-  font-weight: 600;
-  font-size: 1.1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.cta-button-outline-white:hover {
-  background: white;
-  color: #2563eb;
-  transform: translateY(-2px);
-}
-
-.cta-button-small {
-  background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
-  color: white;
-  border: none;
-  padding: 0.6rem 1.5rem;
-  border-radius: 6px;
-  font-weight: 600;
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.cta-button-small:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
-}
-
-/* بخش هیرو */
-.hero-section {
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-  min-height: 90vh;
-  display: flex;
-  align-items: center;
-  padding: 8rem 2rem 4rem;
-  position: relative;
-}
-
-.hero-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  align-items: center;
-}
-
-.hero-badge {
-  background: rgba(37, 99, 235, 0.1);
-  color: #2563eb;
-  padding: 0.5rem 1.5rem;
-  border-radius: 50px;
-  display: inline-block;
-  margin-bottom: 1.5rem;
-  font-weight: 600;
-  font-size: 0.9rem;
-}
-
-.hero-title {
-  font-size: 3.5rem;
-  font-weight: bold;
-  line-height: 1.2;
-  margin-bottom: 1.5rem;
-  color: #1e293b;
-}
-
-.hero-subtitle {
-  font-size: 1.3rem;
-  color: #64748b;
-  line-height: 1.8;
-  margin-bottom: 2.5rem;
-  max-width: 90%;
-}
-
-.gradient-text {
-  background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  display: block;
-}
-
-.hero-card {
-  background: white;
-  border-radius: 20px;
-  padding: 2rem;
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-.hero-card-image {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  height: 300px;
-  border-radius: 15px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-bottom: 2rem;
-}
-
-.hero-buttons {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  flex-wrap: wrap;
-  margin-bottom: 3rem;
-}
-
-.stats-container {
-  display: flex;
-  gap: 3rem;
-  margin-top: 3rem;
-  padding-top: 2rem;
-  border-top: 1px solid #e2e8f0;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-}
-
-.stat-item {
-  text-align: center;
-  min-width: 120px; /* حداقل عرض برای موبایل */
-}
-
-.stat-number {
-  font-size: 2rem;
-  font-weight: bold;
-  color: #2563eb;
-}
-
-.stat-label {
-  color: #64748b;
-  font-size: 0.9rem;
-}
-
-/* بخش خدمات */
-.services-section {
-  padding: 6rem 2rem;
-  background: white;
-}
-
-.section-header {
-  text-align: center;
-  margin-bottom: 5rem;
-}
-
-.section-title {
-  font-size: 2.8rem;
-  font-weight: bold;
-  margin-bottom: 1.5rem;
-  color: #1e293b;
-}
-
-.section-description {
-  font-size: 1.2rem;
-  color: #64748b;
-  max-width: 600px;
-  margin: 0 auto;
-  line-height: 1.7;
-}
-
-.service-tabs {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  margin-bottom: 3rem;
-  flex-wrap: wrap;
-}
-
-.service-tab {
-  background: white;
-  color: #4b5563;
-  border: 2px solid #e5e7eb;
-  padding: 1rem 2rem;
-  border-radius: 12px;
-  font-weight: 600;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.service-tab.active {
-  background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
-  color: white;
-  border: none;
-}
-
-.service-content {
-  background: #f8fafc;
-  border-radius: 20px;
-  padding: 3rem;
-  border: 1px solid #e2e8f0;
-}
-
-.service-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
-  align-items: center;
-}
-
-.service-info {
-  text-align: right;
-}
-
-.service-title {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-  color: #1e293b;
-}
-
-.service-description {
-  font-size: 1.1rem;
-  color: #64748b;
-  line-height: 1.8;
-  margin-bottom: 2rem;
-}
-
-.feature-list {
-  list-style: none;
-  padding: 0;
-  text-align: right;
-}
-
-.feature-item {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 0.75rem;
-  color: #374151;
-  font-size: 1rem;
-}
-
-.feature-icon {
-  color: #10b981;
-  font-size: 1.2rem;
-  flex-shrink: 0; /* جلوگیری از کوچک شدن آیکون */
-}
-
-.service-display {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  height: 300px;
-  border-radius: 15px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-
-/* CTA بخش */
-.cta-section {
-  background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
-  padding: 6rem 2rem;
-  text-align: center;
-  color: white;
-}
-
-.cta-title {
-  font-size: 2.8rem;
-  font-weight: bold;
-  margin-bottom: 1.5rem;
-}
-
-.cta-description {
-  font-size: 1.2rem;
-  margin-bottom: 3rem;
-  opacity: 0.9;
-  line-height: 1.7;
-}
-
-.cta-buttons {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-/* فوتر */
-.footer {
-  background: #0f172a;
-  color: white;
-  padding: 4rem 2rem 2rem;
-}
-
-.footer-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 3rem;
-  margin-bottom: 3rem;
-}
-
-.footer-section {
-  text-align: right;
-}
-
-.footer-logo {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-  text-decoration: none;
-}
-
-.footer-logo-text {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: white;
-}
-
-.footer-about {
-  color: #cbd5e1;
-  line-height: 1.7;
-  margin-top: 1rem;
-}
-
-.footer-heading {
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin-bottom: 1.5rem;
-}
-
-.footer-links {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.footer-link {
-  color: #cbd5e1;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.footer-link:hover {
-  color: white;
-}
-
-.footer-contact {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  color: #cbd5e1;
-}
-
-.footer-bottom {
-  border-top: 1px solid #334155;
-  padding-top: 2rem;
-  text-align: center;
-  color: #94a3b8;
-  font-size: 0.9rem;
-}
-
-/* بخش‌های جدید بلاگ و پنل مدیریت (همانطور که هست باقی می‌ماند) */
-/* ... کدهای بلاگ و پنل مدیریت شما ... */
-
-/* ======================================== */
-/* MEDIA QUERIES - مهمترین بخش برای ریسپانسیو */
-/* ======================================== */
-
-/* تبلت (768px و کمتر) */
 @media (max-width: 992px) {
-  .hero-title {
-    font-size: 2.8rem;
-  }
-  
-  .section-title {
-    font-size: 2.2rem;
-  }
-  
-  .cta-title {
-    font-size: 2.2rem;
-  }
+  .hero-title { font-size: 2.8rem; }
+  .section-title { font-size: 2.2rem; }
+  .cta-title { font-size: 2.2rem; }
 }
 
-/* موبایل (768px و کمتر) */
 @media (max-width: 768px) {
-  /* عمومی */
-  .container {
-    padding: 0 1rem;
-  }
-  
-  /* هدر */
-  .header {
-    padding: 0.8rem 0;
-  }
-  
-  .header-inner {
-    padding: 0 1rem;
-  }
-  
-  .desktop-menu {
-    display: none; /* مخفی کردن منوی دسکتاپ */
-  }
-  
-  .mobile-menu-btn {
-    display: block; /* نمایش دکمه منوی موبایل */
-  }
-  
-  .logo-icon {
-    width: 35px;
-    height: 35px;
-    font-size: 1rem;
-  }
-  
-  .logo-text {
-    font-size: 1.2rem;
-  }
-  
-  /* هیرو */
-  .hero-section {
-    min-height: auto;
-    padding: 6rem 1rem 3rem;
-  }
-  
-  .hero-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-  
-  .hero-title {
-    font-size: 2.2rem;
-    text-align: center;
-  }
-  
-  .hero-subtitle {
-    font-size: 1rem;
-    max-width: 100%;
-    text-align: center;
-  }
-  
-  .hero-badge {
-    font-size: 0.8rem;
-    margin: 0 auto 1.5rem;
-    text-align: center;
-    display: block;
-    width: fit-content;
-  }
-  
-  .hero-buttons {
-    flex-direction: column;
-    width: 100%;
-    gap: 0.8rem;
-  }
-  
-  .cta-button,
-  .cta-button-outline {
-    width: 100%;
-    justify-content: center;
-    padding: 0.9rem 2rem;
-    font-size: 1rem;
-  }
-  
-  .stats-container {
-    gap: 1.5rem;
-    justify-content: space-around;
-  }
-  
-  .stat-item {
-    min-width: 100px;
-  }
-  
-  .stat-number {
-    font-size: 1.5rem;
-  }
-  
-  .stat-label {
-    font-size: 0.8rem;
-  }
-  
-  /* خدمات */
-  .services-section {
-    padding: 4rem 1rem;
-  }
-  
-  .section-header {
-    margin-bottom: 3rem;
-  }
-  
-  .section-title {
-    font-size: 2rem;
-  }
-  
-  .section-description {
-    font-size: 1rem;
-    padding: 0 0.5rem;
-  }
-  
-  .service-tabs {
-    flex-direction: column;
-    gap: 0.8rem;
-  }
-  
-  .service-tab {
-    width: 100%;
-    justify-content: center;
-    padding: 0.9rem 1rem;
-  }
-  
-  .service-content {
-    padding: 2rem;
-  }
-  
-  .service-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-  
-  .service-info {
-    text-align: center;
-    order: 2; /* تغییر ترتیب نمایش */
-  }
-  
-  .service-display {
-    order: 1; /* عکس اول نمایش داده شود */
-    height: 200px;
-    font-size: 1.2rem;
-  }
-  
-  .feature-list {
-    text-align: center;
-  }
-  
-  .feature-item {
-    justify-content: center;
-    flex-direction: row-reverse; /* آیکون در سمت راست */
-  }
-  
-  /* CTA */
-  .cta-section {
-    padding: 4rem 1rem;
-  }
-  
-  .cta-title {
-    font-size: 1.8rem;
-  }
-  
-  .cta-description {
-    font-size: 1rem;
-    padding: 0 0.5rem;
-  }
-  
-  .cta-buttons {
-    flex-direction: column;
-    gap: 0.8rem;
-  }
-  
-  .cta-button-white,
-  .cta-button-outline-white {
-    width: 100%;
-    justify-content: center;
-  }
-  
-  /* فوتر */
-  .footer {
-    padding: 3rem 1rem 1.5rem;
-  }
-  
-  .footer-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-  
-  .footer-section {
-    text-align: center;
-  }
-  
-  .footer-logo {
-    justify-content: center;
-  }
-  
-  .footer-contact {
-    align-items: center;
-  }
-  
-  /* بلاگ */
-  .blog-hero,
-  .single-post-hero {
-    padding: 6rem 1rem 3rem;
-  }
-  
-  .blog-posts-grid {
-    grid-template-columns: 1fr;
-    padding: 0 1rem;
-  }
-  
-  .single-post-content {
-    padding: 2rem 1rem;
-  }
-  
-  .single-post-image {
-    height: 250px;
-    font-size: 1.2rem;
-  }
+  .container { padding: 0 1rem; }
+  .header { padding: 0.8rem 0; }
+  .header-inner { padding: 0 1rem; }
+  .desktop-menu { display: none; }
+  .mobile-menu-btn { display: block; }
+  .logo-icon { width: 35px; height: 35px; font-size: 1rem; }
+  .logo-text { font-size: 1.2rem; }
+  .hero-section { padding: 4rem 1rem 2rem; }
+  .hero-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .hero-title { font-size: 2rem; text-align: center; }
+  .hero-subtitle { font-size: 1rem; text-align: center; }
+  .hero-card { padding: 1rem; }
+  .hero-card-image { height: 150px; }
+  .cta-button, .cta-button-outline { width: 100%; justify-content: center; padding: 0.9rem 2rem; font-size: 1rem; }
+  .stats-container { gap: 1.5rem; justify-content: space-around; }
+  .stat-item { min-width: 100px; }
+  .stat-number { font-size: 1.5rem; }
+  .stat-label { font-size: 0.8rem; }
+  .services-section { padding: 4rem 1rem; }
+  .section-header { margin-bottom: 3rem; }
+  .section-title { font-size: 2rem; }
+  .section-description { font-size: 1rem; padding: 0 0.5rem; }
+  .service-tabs { flex-direction: column; gap: 0.8rem; }
+  .service-tab { width: 100%; justify-content: center; padding: 0.9rem 1rem; }
+  .service-content { padding: 2rem; }
+  .service-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .service-info { text-align: center; order: 2; }
+  .service-display { order: 1; height: 200px; font-size: 1.2rem; }
+  .feature-list { text-align: center; }
+  .feature-item { justify-content: center; flex-direction: row-reverse; }
+  .cta-section { padding: 4rem 1rem; }
+  .cta-title { font-size: 1.8rem; }
+  .cta-description { font-size: 1rem; padding: 0 0.5rem; }
+  .cta-buttons { flex-direction: column; gap: 0.8rem; }
+  .cta-button-white, .cta-button-outline-white { width: 100%; justify-content: center; }
+  .footer { padding: 3rem 1rem 1.5rem; }
+  .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .footer-section { text-align: center; }
+  .footer-logo { justify-content: center; }
+  .footer-contact { align-items: center; }
 }
 
-/* موبایل کوچک (480px و کمتر) */
 @media (max-width: 480px) {
-  .hero-title {
-    font-size: 1.8rem;
-  }
-  
-  .section-title {
-    font-size: 1.6rem;
-  }
-  
-  .service-title {
-    font-size: 1.5rem;
-  }
-  
-  .cta-title {
-    font-size: 1.5rem;
-  }
-  
-  .menu-item {
-    padding: 0.5rem 1rem;
-    font-size: 0.9rem;
-  }
-  
-  .mobile-nav-item {
-    padding: 0.8rem 1.5rem;
-    font-size: 1rem;
-  }
+  .hero-title { font-size: 1.8rem; }
+  .section-title { font-size: 1.6rem; }
+  .service-title { font-size: 1.5rem; }
+  .cta-title { font-size: 1.5rem; }
+  .menu-item { padding: 0.5rem 1rem; font-size: 0.9rem; }
+  .mobile-nav-item { padding: 0.8rem 1.5rem; font-size: 1rem; }
 }
 
-/* تبلت متوسط (بین 768px و 1024px) */
 @media (min-width: 769px) and (max-width: 1024px) {
-  .container {
-    padding: 0 1.5rem;
-  }
-  
-  .hero-grid {
-    gap: 2rem;
-  }
-  
-  .hero-title {
-    font-size: 2.5rem;
-  }
-  
-  .service-grid {
-    gap: 2rem;
-  }
-  
-  .stats-container {
-    justify-content: space-between;
-  }
+  .container { padding: 0 1.5rem; }
+  .hero-grid { gap: 2rem; }
+  .hero-title { font-size: 2.5rem; }
+  .service-grid { gap: 2rem; }
+  .stats-container { justify-content: space-between; }
 }
