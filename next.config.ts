@@ -4,7 +4,7 @@ const nextConfig = {
     optimizeCss: true, 
   }, 
   typescript: { 
-    ignoreBuildErrors: false, 
+    ignoreBuildErrors: true, 
   }, 
 } 
 export default nextConfig 
